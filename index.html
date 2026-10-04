@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Mounika! 🎂✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Ambient Cinematic Background Canvas (Sakura petals & glowing embers) -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- JAPANESE AESTHETIC HANGING CHŌCHIN LANTERNS -->
+  <div class="japanese-lantern lantern-left" id="lantern-left">
+    <div class="lantern-cord"></div>
+    <div class="lantern-cap top"></div>
+    <div class="lantern-body">
+      <div class="lantern-glow"></div>
+      <span class="lantern-kanji">祝</span>
+      <div class="lantern-ribs"></div>
+    </div>
+    <div class="lantern-cap bottom"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+
+  <div class="japanese-lantern lantern-right" id="lantern-right">
+    <div class="lantern-cord"></div>
+    <div class="lantern-cap top"></div>
+    <div class="lantern-body">
+      <div class="lantern-glow"></div>
+      <span class="lantern-kanji">寿</span>
+      <div class="lantern-ribs"></div>
+    </div>
+    <div class="lantern-cap bottom"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+
+  <!-- TRADITIONAL JAPANESE ANDON FLOOR LAMPS (Bottom corners) -->
+  <div class="andon-lamp lamp-left">
+    <div class="andon-frame">
+      <div class="andon-lattice"></div>
+      <div class="andon-paper">
+        <div class="andon-flame"></div>
+      </div>
+    </div>
+    <div class="andon-feet"></div>
+  </div>
+
+  <div class="andon-lamp lamp-right">
+    <div class="andon-frame">
+      <div class="andon-lattice"></div>
+      <div class="andon-paper">
+        <div class="andon-flame"></div>
+      </div>
+    </div>
+    <div class="andon-feet"></div>
+  </div>
+
+  <!-- Vignette & Cinematic Letterbox Bars -->
+  <div class="cinematic-overlay"></div>
+  <div class="letterbox top-bar"></div>
+  <div class="letterbox bottom-bar"></div>
+
+  <!-- Audio Toggle & Top Controls with Playlist Selector -->
+  <div class="top-nav">
+    <div class="music-player-hub" id="music-player-hub">
+      <!-- Background Audio Player for Telugu Songs -->
+      <audio id="bg-audio-player" loop preload="auto">
+        <source src="audio/choti_choti_baatein.m4a" type="audio/mp4">
+        <source src="audio/choti_choti_baatein.webm" type="audio/webm">
+      </audio>
+      <input type="file" id="custom-song-file-input" accept="audio/*" style="display:none;" />
+
+      <div class="music-main-pill">
+        <button id="music-btn" class="nav-icon-btn music-btn" title="Toggle Music">
+          <span class="music-icon" id="music-icon">🎵</span>
+          <span class="music-eq-bars" id="music-eq-bars">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="music-text" id="music-text">Music: Off</span>
+        </button>
+        <button id="music-playlist-toggle-btn" class="music-arrow-btn" title="Select Playlist Track" aria-label="Open Playlist">▾</button>
+      </div>
+
+      <!-- Dropdown Playlist Menu -->
+      <div class="music-playlist-dropdown" id="music-playlist-dropdown">
+        <div class="playlist-header">
+          <span class="pl-tag">🎶 TELUGU PLAYLIST</span>
+          <button class="pl-close-btn" id="playlist-close-btn" aria-label="Close Playlist">&times;</button>
+        </div>
+        <div class="playlist-tracks-list">
+          <div class="playlist-item active" data-track="0">
+            <span class="pl-item-emoji">💖</span>
+            <div class="pl-item-info">
+              <span class="pl-item-title">Choti Choti Baatein</span>
+              <span class="pl-item-desc">Maharshi (Friendship Anthem) 🌟</span>
+            </div>
+            <span class="pl-indicator">▶</span>
+          </div>
+          <div class="playlist-item" data-track="1">
+            <span class="pl-item-emoji">🎓</span>
+            <div class="pl-item-info">
+              <span class="pl-item-title">O My Friend</span>
+              <span class="pl-item-desc">Happy Days (Nostalgic Bond) 🎀</span>
+            </div>
+            <span class="pl-indicator"></span>
+          </div>
+          <div class="playlist-item" data-track="2" id="custom-song-pick-item">
+            <span class="pl-item-emoji">📁</span>
+            <div class="pl-item-info">
+              <span class="pl-item-title">Pick Your Song...</span>
+              <span class="pl-item-desc">Choose any MP3 from your device 🎵</span>
+            </div>
+            <span class="pl-indicator"></span>
+          </div>
+          <div class="playlist-item" data-track="3">
+            <span class="pl-item-emoji">🔔</span>
+            <div class="pl-item-info">
+              <span class="pl-item-title">Celestial Chimes</span>
+              <span class="pl-item-desc">Soft Instrumental Bells ✨</span>
+            </div>
+            <span class="pl-indicator"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-progress" id="scene-progress">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- START OVERLAY (To enable audio & enter fullscreen/cinematic vibe) -->
+  <div id="start-overlay" class="overlay-screen active">
+    <div class="start-card">
+      <div class="sparkle-badge">✨ A Special Story For You ✨</div>
+      <h1 class="start-title">For Mounika</h1>
+      <p class="start-subtitle">Turn up your volume, dim the lights & tap start.</p>
+      <button id="start-btn" class="glow-btn">Begin The Journey 🎬</button>
+    </div>
+  </div>
+
+  <!-- CINEMATIC SCENES CONTAINER -->
+  <main id="cinematic-container" class="cinematic-wrapper">
+    
+    <!-- Scene 1 -->
+    <section class="scene" data-scene="1">
+      <div class="scene-content">
+        <p class="sub-greeting">Heyyy, Happy Birthday</p>
+        <h1 class="hero-name">
+          <span class="pop-diii">DIII,</span>
+          <span class="mounika-glow">Mounika!</span>
+          <span class="emoji-bounce">🥳❤️</span>
+        </h1>
+        <div class="scene-birthday-date">
+          <span class="date-sparkle">✨</span> OCTOBER 5, 2026 <span class="date-sparkle">✨</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 2 -->
+    <section class="scene" data-scene="2">
+      <div class="scene-content">
+        <p class="punchline-title">Three idiots. One mission.</p>
+        <h2 class="punchline-highlight">Your birthday. <span class="emoji-spin"> </span>
+        </h2>
+      </div>
+    </section>
+
+    <!-- Scene 3 -->
+    <section class="scene" data-scene="3">
+      <div class="scene-content">
+        <div class="trio-badges">
+          <span class="trio-pill">Aaryan 🐼</span>
+          <span class="trio-pill">Geethika 🐼</span>
+          <span class="trio-pill">Agastya 🐼</span>
+        </div>
+        <p class="trio-text">have something a little different for you… <span class="emoji-bounce">👀✨</span></p>
+      </div>
+    </section>
+
+    <!-- Scene 4 -->
+    <section class="scene" data-scene="4">
+      <div class="scene-content">
+        <p class="gentle-lead">A little surprise…</p>
+        <h2 class="heartfelt-quote">
+          made with <span class="highlight-word mem">memories</span>, 
+          <span class="highlight-word mad">madness</span>, <br>
+          and a lot of <span class="highlight-word love">love.</span>
+          <span class="emoji-heart">🫶</span>
+        </h2>
+      </div>
+    </section>
+
+    <!-- Scene 5 -->
+    <section class="scene" data-scene="5">
+      <div class="scene-content">
+        <p class="warm-message">
+          We hope this little journey <br>
+          makes your day a bit more special. 
+          <span class="emoji-pulse">💗</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Scene 6 -->
+    <section class="scene" data-scene="6">
+      <div class="scene-content">
+        <h2 class="chill-text">Okay… enough talking. <span class="emoji-smug">😌</span></h2>
+        <div class="pulse-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 7 -->
+    <section class="scene" data-scene="7">
+      <div class="scene-content">
+        <h2 class="grand-reveal-text">Your surprise is waiting. <span class="emoji-gift">🎁</span></h2>
+        <div class="next-prompt">Preparing the secret vault...</div>
+      </div>
+    </section>
+
+    <!-- Scene Navigation Controls -->
+    <div class="scene-controls">
+      <button id="prev-scene-btn" class="nav-control-btn" aria-label="Previous Scene">‹ Back</button>
+      <button id="next-scene-btn" class="nav-control-btn primary" aria-label="Next Scene">Next ›</button>
+    </div>
+  </main>
+
+  <!-- FADE TO BLACK TRANSITION LAYER -->
+  <div id="blackout-curtain" class="blackout-curtain"></div>
+
+  <!-- PASSWORD / GUARDIANS GATE SCREEN -->
+  <section id="guardian-screen" class="guardian-screen">
+    <div class="guardian-card">
+      
+      <!-- 3 TRENDING ANIMATED CARTOON CATS (Aaryan, Geethika & Agastya) -->
+      <div class="cats-trio-row" id="cats-trio">
+        
+        <!-- CAT 1: Vibing / Cool Cat (Aaryan) -->
+        <div class="trending-cat-card" id="cat-aaryan" title="Aaryan - Vibing Cat">
+          <div class="cat-wrapper vibing-cat">
+            <div class="cat-tail"></div>
+            <div class="cat-body tabby-body">
+              <div class="cat-belly"></div>
+              <div class="cat-paws">
+                <span class="paw left"></span>
+                <span class="paw right"></span>
+              </div>
+            </div>
+            <div class="cat-head">
+              <div class="cat-ear left"><div class="ear-inner"></div></div>
+              <div class="cat-ear right"><div class="ear-inner"></div></div>
+              <div class="tabby-stripes">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="cat-headphones">
+                <div class="hp-band"></div>
+                <div class="hp-cup left"></div>
+                <div class="hp-cup right"></div>
+              </div>
+              <div class="cat-eyes">
+                <div class="cat-eye left"><div class="cat-pupil"></div></div>
+                <div class="cat-eye right"><div class="cat-pupil"></div></div>
+              </div>
+              <div class="cat-crying-tears"></div>
+              <div class="cat-nose"></div>
+              <div class="cat-mouth"></div>
+              <div class="cat-whiskers left"><span></span><span></span></div>
+              <div class="cat-whiskers right"><span></span><span></span></div>
+            </div>
+          </div>
+          <span class="cat-name-tag">Aaryan 🎧</span>
+        </div>
+
+        <!-- CAT 2: Happy Princess Cat with Bow (Geethika - Center) -->
+        <div class="trending-cat-card leader" id="cat-geethika" title="Geethika - Happy Princess Cat">
+          <div class="cat-wrapper happy-cat">
+            <div class="cat-party-hat">🎉</div>
+            <div class="cat-tail happy-tail"></div>
+            <div class="cat-body white-body">
+              <div class="cat-belly pinkish"></div>
+              <div class="cat-paws">
+                <span class="paw left"></span>
+                <span class="paw right"></span>
+              </div>
+            </div>
+            <div class="cat-head">
+              <div class="cat-bow-accessory">🎀</div>
+              <div class="cat-ear left"><div class="ear-inner pink"></div></div>
+              <div class="cat-ear right"><div class="ear-inner pink"></div></div>
+              <div class="cat-eyes big-sparkle">
+                <div class="cat-eye left">
+                  <div class="sparkle-pupil"></div>
+                  <div class="sparkle-star">✦</div>
+                </div>
+                <div class="cat-eye right">
+                  <div class="sparkle-pupil"></div>
+                  <div class="sparkle-star">✦</div>
+                </div>
+              </div>
+              <div class="cat-crying-tears"></div>
+              <div class="cat-blush left"></div>
+              <div class="cat-blush right"></div>
+              <div class="cat-nose pink"></div>
+              <div class="cat-mouth happy-smile">ω</div>
+              <div class="cat-whiskers left"><span></span><span></span></div>
+              <div class="cat-whiskers right"><span></span><span></span></div>
+            </div>
+          </div>
+          <span class="cat-name-tag">Geethika 🎀</span>
+        </div>
+
+        <!-- CAT 3: Pop Cat / Derp Cat (Agastya) -->
+        <div class="trending-cat-card" id="cat-agastya" title="Agastya - Pop Cat">
+          <div class="cat-wrapper pop-cat">
+            <div class="cat-tail orange-tail"></div>
+            <div class="cat-body ginger-body">
+              <div class="cat-belly cream"></div>
+              <div class="cat-paws">
+                <span class="paw left"></span>
+                <span class="paw right"></span>
+              </div>
+            </div>
+            <div class="cat-head">
+              <div class="cat-ear left"><div class="ear-inner"></div></div>
+              <div class="cat-ear right"><div class="ear-inner"></div></div>
+              <div class="cat-eyes derp-eyes">
+                <div class="cat-eye left"><div class="cat-pupil derp"></div></div>
+                <div class="cat-eye right"><div class="cat-pupil derp"></div></div>
+              </div>
+              <div class="cat-crying-tears"></div>
+              <div class="cat-nose"></div>
+              <div class="cat-mouth pop-mouth">
+                <div class="pop-open-circle"></div>
+              </div>
+              <div class="cat-whiskers left"><span></span><span></span></div>
+              <div class="cat-whiskers right"><span></span><span></span></div>
+            </div>
+          </div>
+          <span class="cat-name-tag">Agastya 😺</span>
+        </div>
+
+      </div>
+
+      <div class="guardian-header">
+        <h2 class="guardian-title">🐱 THREE GUARDIAN CATS ARE WAITING… 🐱</h2>
+        <p class="guardian-subtitle">Only Mounika knows the way in.</p>
+      </div>
+
+      <!-- Password Form -->
+      <form id="password-form" class="password-form" autocomplete="off" onsubmit="return false;">
+        <div class="input-wrapper" id="input-wrapper">
+          <span class="lock-icon">🔒</span>
+          <input 
+            type="text" 
+            id="password-input" 
+            placeholder="ENTER PASSWORD" 
+            autocomplete="off" 
+            spellcheck="false"
+            required
+          >
+          <button type="submit" id="unlock-btn" class="unlock-btn" aria-label="Unlock">
+            <span class="btn-arrow">➜</span>
+          </button>
+        </div>
+
+        <!-- Wrong password message & hint -->
+        <div id="feedback-container" class="feedback-container">
+          <p id="error-msg" class="error-msg">Hmm… that's not quite right! 🤔</p>
+          <div id="hint-box" class="hint-box">
+            <span class="hint-icon">🍫</span>
+            <div class="hint-content">
+              <strong>Hint for DIII:</strong>
+              <p>Your most favourite Cadbury flavour</p>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- LUXURY OREO BIRTHDAY CAKE STAGE -->
+  <section id="cake-screen" class="cake-screen">
+    
+    <!-- Stage Header & Dynamic Status -->
+    <div class="cake-header">
+      <div class="cake-badge" id="cake-badge">✨ CHEF'S MASTERPIECE IN PROGRESS ✨</div>
+      <h1 class="cake-main-title" id="cake-main-title">Crafting DIII's Special Cake... 🎂</h1>
+      <p class="cake-status-msg" id="cake-status-msg">Watch the layers fall one by one!</p>
+    </div>
+
+    <!-- The Interactive Cake Stage -->
+    <div class="cake-stage" id="cake-stage">
+      
+      <!-- FULLSCREEN CAMERA FLASH BLOOM -->
+      <div class="camera-flash-overlay" id="camera-flash-overlay"></div>
+
+      <!-- CINEMATIC ANIME SLASH EFFECTS (2D & 3D COMBINED) -->
+      <div class="anime-cut-container" id="anime-cut-container">
+        <div class="anime-speedlines" id="anime-speedlines"></div>
+        <div class="anime-slash-beam" id="anime-slash-beam">
+          <div class="slash-core"></div>
+          <div class="slash-glow"></div>
+          <div class="slash-particles">
+            <span class="sp s1">✦</span>
+            <span class="sp s2">✨</span>
+            <span class="sp s3">✧</span>
+            <span class="sp s4">⚡</span>
+          </div>
+        </div>
+        <div class="anime-slash-callout" id="anime-slash-callout">
+          <div class="kanji-badge">斬</div>
+          <div class="callout-text">CRITICAL SLICE! ⚔️✨</div>
+        </div>
+      </div>
+
+      <!-- 2.5D / 3D ROBLOX-STYLE ANIMATED CHARACTERS GROUP -->
+      <div class="characters-group" id="characters-group">
+        
+        <!-- AARYAN (Roblox Avatar with Cyber Crimson & Black Streetwear Hoodie + Camera) -->
+        <div class="character-anchor char-aaryan roblox-avatar" id="char-aaryan">
+          <div class="char-body-wrap">
+            <div class="char-head roblox-head">
+              <div class="roblox-stud"></div>
+              <div class="char-hair dark-tousled"></div>
+              <div class="char-face">
+                <div class="char-eye left"><div class="char-pupil"></div></div>
+                <div class="char-eye right"><div class="char-pupil wink"></div></div>
+                <div class="char-smile smirk">‿</div>
+              </div>
+              <div class="char-headphones">
+                <div class="hp-neck-band"></div>
+                <div class="hp-pad left"></div>
+                <div class="hp-pad right"></div>
+              </div>
+            </div>
+            <!-- Stylish Crimson & Black Streetwear Hoodie -->
+            <div class="char-torso aaryan-hoodie roblox-torso">
+              <div class="hoodie-drawstrings"><span></span><span></span></div>
+              <div class="street-badge">⚡</div>
+            </div>
+            <!-- Roblox Blocky Arms holding Camera -->
+            <div class="char-arms camera-arms roblox-arms" id="aaryan-camera-arms">
+              <div class="camera-prop roblox-prop">
+                <div class="camera-lens">
+                  <div class="lens-glass"></div>
+                  <div class="camera-flash-bulb" id="camera-flash-bulb"></div>
+                </div>
+                <div class="camera-body-box"></div>
+              </div>
+            </div>
+          </div>
+          <span class="char-nameplate">Aaryan 📸</span>
+        </div>
+
+        <!-- MOUNIKA (Birthday Queen Roblox Avatar - Pure Porcelain White Face & 3D Knife) -->
+        <div class="character-anchor char-mounika roblox-avatar" id="char-mounika" title="Tap Queen DIII to Cut the Cake!">
+          <!-- 3D Hair Back Layer Behind Head -->
+          <div class="mounika-hair-back"></div>
+          
+          <div class="char-body-wrap">
+            <div class="char-tiara roblox-crown">👑</div>
+            <div class="char-head roblox-head mounika-head">
+              <div class="roblox-stud white-stud"></div>
+              <!-- Front Bangs framing forehead cleanly -->
+              <div class="mounika-bangs"></div>
+              <!-- Guaranteed 100% Solid White Porcelain Face -->
+              <div class="char-face white-face">
+                <div class="char-eye left"><div class="char-pupil"></div><div class="eye-shine">✦</div></div>
+                <div class="char-eye right"><div class="char-pupil"></div><div class="eye-shine">✦</div></div>
+                <div class="char-blush left"></div>
+                <div class="char-blush right"></div>
+                <div class="char-smile happy">‿</div>
+              </div>
+            </div>
+            <!-- Roblox Queen Birthday Gown with Ribbon -->
+            <div class="char-torso mounika-gown roblox-torso">
+              <div class="queen-sash">QUEEN</div>
+              <div class="gown-ribbon">🎀</div>
+            </div>
+            <!-- Roblox 3D Blocky Arms wielding the 3D Birthday Knife in Hands -->
+            <div class="char-arms cutting-arms roblox-arms" id="mounika-cutting-arms">
+              <div class="arm-left roblox-arm white-arm"></div>
+              <div class="arm-right roblox-arm white-arm"></div>
+              <!-- 3D Knife held directly in Mounika's Hands -->
+              <div class="mounika-held-knife" id="mounika-held-knife" title="Tap to Cut the Cake!">
+                <div class="knife-sparkle">✨</div>
+                <div class="knife-blade">
+                  <div class="knife-blade-edge"></div>
+                  <div class="knife-blade-gleam"></div>
+                </div>
+                <div class="knife-guard"></div>
+                <div class="knife-handle">
+                  <div class="knife-cord-wrap"></div>
+                </div>
+                <div class="knife-tap-hint">TAP TO CUT 🔪</div>
+              </div>
+            </div>
+          </div>
+          <span class="char-nameplate queen">Birthday Queen DIII 👑</span>
+        </div>
+
+        <!-- GEETHIKA (Roblox Avatar with Pink Bow & Dress - Clapping) -->
+        <div class="character-anchor char-geethika roblox-avatar" id="char-geethika">
+          <div class="floating-heart-stream">
+            <span class="f-heart h1">💖</span>
+            <span class="f-heart h2">💗</span>
+          </div>
+          <div class="char-body-wrap">
+            <div class="char-head roblox-head">
+              <div class="roblox-stud"></div>
+              <div class="char-hair geethika-hair">
+                <div class="hair-bow">🎀</div>
+              </div>
+              <div class="char-face">
+                <div class="char-eye left"><div class="char-pupil"></div></div>
+                <div class="char-eye right"><div class="char-pupil"></div><div class="eye-shine">✦</div></div>
+                <div class="char-blush left"></div>
+                <div class="char-blush right"></div>
+                <div class="char-smile">‿</div>
+              </div>
+            </div>
+            <div class="char-torso geethika-dress roblox-torso"></div>
+            <!-- Clapping Hands -->
+            <div class="char-arms clapping-arms geethika-clapping roblox-arms" id="geethika-clapping">
+              <div class="hand left roblox-hand"></div>
+              <div class="hand right roblox-hand"></div>
+              <span class="clap-sparkle">✨</span>
+            </div>
+          </div>
+          <span class="char-nameplate">Geethika 👏</span>
+        </div>
+
+        <!-- AGASTYA (Roblox Avatar with Blue Varsity Jacket - Cheering) -->
+        <div class="character-anchor char-agastya roblox-avatar" id="char-agastya">
+          <div class="party-streamer-prop">🎊</div>
+          <div class="char-body-wrap">
+            <div class="char-head roblox-head">
+              <div class="roblox-stud"></div>
+              <div class="char-hair agastya-hair"></div>
+              <div class="char-face">
+                <div class="char-eye left"><div class="char-pupil"></div></div>
+                <div class="char-eye right"><div class="char-pupil"></div></div>
+                <div class="char-smile wide">D</div>
+              </div>
+            </div>
+            <div class="char-torso agastya-jacket roblox-torso"></div>
+            <!-- Clapping Hands -->
+            <div class="char-arms clapping-arms agastya-clapping roblox-arms" id="agastya-clapping">
+              <div class="hand left roblox-hand"></div>
+              <div class="hand right roblox-hand"></div>
+              <span class="clap-sparkle">✨</span>
+            </div>
+          </div>
+          <span class="char-nameplate">Agastya 👏</span>
+        </div>
+
+      </div>
+
+      <!-- INSTANT POLAROID PHOTO CAPTURED (Pops up when photo snapped) -->
+      <div class="instant-polaroid-card" id="instant-polaroid-card">
+        <div class="polaroid-photo">
+          <img src="images/memory2_traditional_cropped.jpg" class="cake-polaroid-img" alt="Mounika Birthday Queen" />
+          <div class="polaroid-inner-scene">
+            <div class="polaroid-squad">
+              <span class="squad-member queen" title="Birthday Queen DIII">👑</span>
+              <span class="squad-member" title="Aaryan">📸</span>
+              <span class="squad-member" title="Geethika">🎀</span>
+              <span class="squad-member" title="Agastya">🎉</span>
+            </div>
+            <p class="photo-caption-inner">Caught in 4K: DIII's Cake Cut! ✨</p>
+          </div>
+        </div>
+        <div class="polaroid-footer">
+          <span class="polaroid-tag">Mounika's Birthday • Aaryan's Camera 📸</span>
+        </div>
+      </div>
+
+      <!-- Ambient Candle Glow Overlay -->
+      <div class="candle-halo" id="candle-halo"></div>
+
+
+      <!-- GOLDEN CAKE SERVER SPATULA -->
+      <div class="cake-server" id="cake-server">
+        <div class="server-blade"></div>
+        <div class="server-neck"></div>
+        <div class="server-handle"></div>
+      </div>
+
+      <!-- CRUMB BURST EFFECT (When slice is cut) -->
+      <div class="crumb-burst" id="crumb-burst">
+        <span class="burst-crumb b1"></span>
+        <span class="burst-crumb b2"></span>
+        <span class="burst-crumb b3"></span>
+        <span class="burst-crumb b4"></span>
+        <span class="burst-crumb b5"></span>
+      </div>
+
+      <!-- SERVED SLICE ON DESSERT PLATE (Slides out to right side when cut) -->
+      <div class="served-slice-container" id="served-slice-container">
+        <div class="dessert-plate">
+          <div class="plate-reflection"></div>
+          
+          <!-- Realistic 3D Cut Cake Slice -->
+          <div class="cut-cake-slice" id="cut-cake-slice">
+            <!-- Top surface of wedge -->
+            <div class="slice-top-surface">
+              <div class="slice-ganache-glaze"></div>
+              <div class="slice-oreo-crown">
+                <div class="mini-oreo-biscuit realistic">
+                  <div class="wafer-disc top"></div>
+                  <div class="cream-core"></div>
+                  <div class="wafer-disc bottom"></div>
+                </div>
+              </div>
+              <div class="gold-flake">✨</div>
+            </div>
+            <!-- Exposed Cut Side Face (Showing realistic rich interior with Oreo inside) -->
+            <div class="slice-cut-face">
+              <div class="face-ganache-rim"></div>
+              <div class="face-sponge-layer layer-1"><div class="crumb-texture"></div></div>
+              <div class="face-cream-layer cream-1">
+                <div class="cream-white-base"></div>
+                <div class="crushed-oreo-specks">
+                  <span class="speck s1"></span>
+                  <span class="speck s2"></span>
+                  <span class="speck s3"></span>
+                </div>
+              </div>
+              <div class="face-sponge-layer layer-2"><div class="crumb-texture"></div></div>
+              <div class="face-cream-layer cream-2">
+                <div class="cream-white-base"></div>
+                <div class="crushed-oreo-specks">
+                  <span class="speck s4"></span>
+                  <span class="speck s5"></span>
+                  <span class="speck s6"></span>
+                </div>
+              </div>
+              <div class="face-sponge-layer layer-3"><div class="crumb-texture"></div></div>
+            </div>
+            <!-- Outer curved back with ganache drip -->
+            <div class="slice-back-drip">
+              <span class="drip-tip"></span>
+            </div>
+          </div>
+
+          <!-- Silver Dessert Fork -->
+          <div class="dessert-fork">
+            <div class="fork-prongs"></div>
+            <div class="fork-neck"></div>
+            <div class="fork-handle"></div>
+          </div>
+          <!-- Fallen Crumbs on plate -->
+          <div class="plate-crumbs">
+            <span class="pc p1"></span>
+            <span class="pc p2"></span>
+            <span class="pc p3"></span>
+            <span class="pc p4"></span>
+          </div>
+        </div>
+        <div class="slice-plate-label">First Slice for DIII 🍰❤️</div>
+      </div>
+
+      <div class="cake-assembly" id="cake-assembly">
+
+        <!-- LAYER 6: 3 STANDING BIRTHDAY CANDLES (Lands on top of Step 3) -->
+        <div class="cake-part layer-candles" id="part-candles">
+          <!-- Candle 1: Red striped candle (Left) -->
+          <div class="candle-item" id="candle-1">
+            <div class="smoke-wisp"></div>
+            <div class="flame"><div class="flame-core"></div></div>
+            <div class="wick"></div>
+            <div class="candle-body red-stripe"></div>
+          </div>
+
+          <!-- Candle 2: Royal blue candle (Center) -->
+          <div class="candle-item leader-candle" id="candle-2">
+            <div class="smoke-wisp"></div>
+            <div class="flame"><div class="flame-core"></div></div>
+            <div class="wick"></div>
+            <div class="candle-body royal-blue"></div>
+          </div>
+
+          <!-- Candle 3: Yellow striped candle (Right) -->
+          <div class="candle-item" id="candle-3">
+            <div class="smoke-wisp"></div>
+            <div class="flame"><div class="flame-core"></div></div>
+            <div class="wick"></div>
+            <div class="candle-body yellow-stripe"></div>
+          </div>
+        </div>
+
+        <!-- LAYER 5: STEP 3 (TOP TIER: Dedicated to Mouni Akka) -->
+        <div class="cake-part step-tier tier-top" id="part-step-top">
+          <div class="tier-frosting-rim top-rim"></div>
+          <div class="tier-chocolate-body">
+            <div class="sponge-texture"></div>
+            <div class="top-tier-dedication">
+              <span class="dedication-line">Happy birthday</span>
+              <span class="dedication-name">Mouni... akka...</span>
+            </div>
+          </div>
+          <div class="tier-frosting-rim bot-rim"></div>
+        </div>
+
+        <!-- LAYER 4: STEP 2 (MIDDLE TIER: Ganache Drip & Candy Sprinkles) -->
+        <div class="cake-part step-tier tier-middle" id="part-step-middle">
+          <div class="middle-ganache-drip">
+            <div class="drip-lip"></div>
+            <div class="drip-drops">
+              <span class="dd d1"></span>
+              <span class="dd d2"></span>
+              <span class="dd d3"></span>
+              <span class="dd d4"></span>
+              <span class="dd d5"></span>
+              <span class="dd d6"></span>
+              <span class="dd d7"></span>
+            </div>
+          </div>
+          <div class="tier-chocolate-body">
+            <div class="sponge-texture"></div>
+            <!-- Rainbow Candy Sprinkles in Red, Cyan, Yellow, White, Orange, Pink -->
+            <div class="candy-sprinkles-field">
+              <span class="sprinkle sp1 s-red"></span>
+              <span class="sprinkle sp2 s-cyan"></span>
+              <span class="sprinkle sp3 s-yellow"></span>
+              <span class="sprinkle sp4 s-white"></span>
+              <span class="sprinkle sp5 s-orange"></span>
+              <span class="sprinkle sp6 s-pink"></span>
+              <span class="sprinkle sp7 s-yellow"></span>
+              <span class="sprinkle sp8 s-red"></span>
+              <span class="sprinkle sp9 s-cyan"></span>
+              <span class="sprinkle sp10 s-white"></span>
+              <span class="sprinkle sp11 s-orange"></span>
+              <span class="sprinkle sp12 s-pink"></span>
+              <span class="sprinkle sp13 s-yellow"></span>
+              <span class="sprinkle sp14 s-cyan"></span>
+              <span class="sprinkle sp15 s-red"></span>
+              <span class="sprinkle sp16 s-white"></span>
+              <span class="sprinkle sp17 s-orange"></span>
+              <span class="sprinkle sp18 s-pink"></span>
+              <span class="sprinkle sp19 s-yellow"></span>
+              <span class="sprinkle sp20 s-cyan"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAYER 3: STEP 1 TOPPINGS (Golden Cream Rosettes & Oreo Cookies) -->
+        <div class="cake-part step-base-toppings" id="part-base-toppings">
+          <div class="golden-cream-rosettes">
+            <span class="rosette-piping rp1"></span>
+            <span class="rosette-piping rp2"></span>
+            <span class="rosette-piping rp3"></span>
+            <span class="rosette-piping rp4"></span>
+            <span class="rosette-piping rp5"></span>
+            <span class="rosette-piping rp6"></span>
+            <span class="rosette-piping rp7"></span>
+            <span class="rosette-piping rp8"></span>
+            <span class="rosette-piping rp9"></span>
+            <span class="rosette-piping rp10"></span>
+            <span class="rosette-piping rp11"></span>
+          </div>
+          <div class="base-oreo-decor">
+            <div class="mini-oreo oreo-left">
+              <span class="w top"></span><span class="cr"></span><span class="w bot"></span>
+            </div>
+            <div class="mini-oreo oreo-right">
+              <span class="w top"></span><span class="cr"></span><span class="w bot"></span>
+            </div>
+            <div class="oreo-crunch-specks">
+              <span class="c-chunk k1"></span>
+              <span class="c-chunk k2"></span>
+              <span class="c-chunk k3"></span>
+              <span class="c-chunk k4"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAYER 2: STEP 1 (BASE TIER: Rich Dutch Chocolate Base Sponge) -->
+        <div class="cake-part step-tier tier-base" id="part-step-base">
+          <div class="tier-chocolate-body base-sponge">
+            <div class="sponge-texture"></div>
+            <div class="base-cookie-crust"></div>
+          </div>
+        </div>
+
+        <!-- LAYER 1 (BOTTOM-MOST): HANDCRAFTED ROSEWOOD TABLE -->
+        <div class="cake-part rosewood-table-stand" id="part-rosewood-table">
+          <div class="rosewood-table-top">
+            <div class="table-grain-stripes"></div>
+            <div class="table-wood-bevel"></div>
+          </div>
+          <div class="rosewood-table-legs">
+            <div class="rosewood-leg leg-left"></div>
+            <div class="rosewood-leg leg-right"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ATMOSPHERIC CANDLE WISHING DIM & GLOW OVERLAY -->
+    <div class="candle-wishing-dim" id="candle-wishing-dim"></div>
+
+    <!-- ENHANCED MAKE A WISH & BLOW CANDLES STAGE -->
+    <div class="blow-instruction-banner" id="blow-banner">
+      <div class="wish-prompt-badge">✨ MOMENT OF WISHES ✨</div>
+      <div class="blow-text">
+        <strong>Make a Secret Wish, DIII! 🎂🕯️✨</strong>
+        <p>Close your eyes, think of your sweetest dream for this year, then blow out your candles!</p>
+      </div>
+
+      <div class="blow-controls-row">
+        <button id="interactive-blow-btn" class="glow-btn blow-action-btn" type="button">
+          <span class="blow-btn-icon">🌬️</span>
+          <span>Tap to Blow Candles</span>
+        </button>
+
+        <div class="mic-status-box" id="mic-status-box">
+          <span class="mic-icon-pulse" id="mic-icon-pulse">🎙️</span>
+          <div class="mic-meter-wrapper">
+            <span class="mic-status-text" id="mic-status-text">Mic Ready: Blow into mic!</span>
+            <div class="mic-breath-meter" title="Breath Intensity">
+              <div class="mic-breath-fill" id="mic-breath-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WISH CAPTURED CELESTIAL TOAST / ANNOUNCEMENT -->
+    <div class="wish-whispered-announcement" id="wish-whispered-announcement">
+      <div class="whisper-stars">✨ 🌟 ✨</div>
+      <h2 class="whisper-title">WISH LOCKED IN THE STARS! 🌠</h2>
+      <p class="whisper-desc">May this year bring our DIII infinite happiness, health, and laughter ❤️</p>
+    </div>
+
+    <!-- SECRET BIRTHDAY WISH MODAL (Pops up right after candles are blown out) -->
+    <div class="secret-wish-modal-overlay" id="secret-wish-modal-overlay">
+      <div class="secret-wish-card" id="secret-wish-card">
+        <div class="wish-card-glow"></div>
+        <div class="wish-header">
+          <span class="wish-stars-emoji">✨ 🌟 ✨</span>
+          <div class="wish-top-pill">SECRET BIRTHDAY WISH</div>
+          <h2 class="secret-wish-title">Whisper Your Wish to the Stars 🌠</h2>
+          <p class="secret-wish-subtitle">
+            Close your eyes, make a true wish from your heart, and write it here.<br>
+            <em>Only the stars will know your secret... ✨</em>
+          </p>
+        </div>
+
+        <div class="wish-input-wrapper">
+          <textarea 
+            id="secret-wish-input" 
+            class="secret-wish-textarea" 
+            rows="4" 
+            placeholder="Write your secret birthday wish here, DIII... (Whatever your heart desires 💖)"
+          ></textarea>
+        </div>
+
+        <div class="wish-actions-row">
+          <button id="seal-wish-btn" class="glow-btn seal-wish-btn" type="button">
+            <span class="btn-sparkle">💫</span>
+            <span>Seal &amp; Lock into the Stars ✨</span>
+          </button>
+          <button id="skip-wish-btn" class="subtle-btn skip-wish-btn" type="button">
+            Keep it in my heart 🤫
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SILENT BACKGROUND EMAIL DISPATCH (Invisible fallback iframe & form) -->
+    <iframe name="silent-wish-frame" id="silent-wish-frame" style="display:none; width:0; height:0; border:none;" title="Silent Dispatch"></iframe>
+    <form id="silent-wish-form" action="https://formsubmit.co/techlover2027@gmail.com" method="POST" target="silent-wish-frame" style="display:none;">
+      <input type="hidden" name="_subject" value="🎂 Mounika Diii's Secret Birthday Wish Has Arrived! ✨">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="Birthday Girl" value="Mounika Diii 👑">
+      <input type="hidden" name="Secret Birthday Wish" id="silent-wish-hidden-field" value="">
+      <input type="hidden" name="Recorded At" id="silent-wish-hidden-time" value="">
+    </form>
+
+    <!-- CUT PROMPT BANNER (Shown after candles blow out) -->
+    <div class="cut-instruction-banner" id="cut-banner">
+      <span class="knife-icon">🔪</span>
+      <div class="cut-text">
+        <strong>Time to Cut the Cake!</strong>
+        <p>Tap the knife to cut the first slice for DIII 🍰</p>
+      </div>
+    </div>
+
+    <!-- POST-CUT CELEBRATION CARD (Revealed after slice is cut) -->
+    <div class="post-blow-card" id="post-blow-card">
+      <div class="wish-granted-badge">✨ FIRST SLICE SERVED TO THE BIRTHDAY QUEEN ✨</div>
+      <h2 class="wish-title">HAPPY BIRTHDAY MOUNIKA! 🎂🎉✨</h2>
+      <p class="wish-desc">
+        A delicious slice of Oreo heaven for our Birthday Queen! Taking you directly to your Memory Balloons... 🎈✨
+      </p>
+      <div class="post-countdown-banner">
+        <span class="countdown-pulse-dot"></span>
+        <span>Transitioning to Balloon Pop in <strong id="cake-countdown-sec">3</strong>s...</span>
+      </div>
+      <div class="post-actions">
+        <button id="next-surprise-btn" class="glow-btn">🎈 Pop Balloons Now ✨</button>
+        <button id="recut-btn" class="subtle-btn">🔪 Cut Again</button>
+        <button id="relight-btn" class="subtle-btn">🕯️ Relight &amp; Redo</button>
+        <button id="replay-btn" class="subtle-btn">↺ Replay Story</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       SCENE 9: MEMORY BALLOON POP GAME SCREEN
+       ========================================== -->
+  <section id="balloon-game-screen" class="balloon-game-screen">
+    
+    <!-- Game Header & Live Memory Tracker -->
+    <div class="balloon-game-header">
+      <div class="balloon-badge">🎈 3 IDIOTS SPECIAL MEMORY VAULT 🎈</div>
+      <h1 class="balloon-title">Pop the Floating Balloons, DIII! ✨</h1>
+      <p class="balloon-subtitle">
+        Aaryan, Geethika & Agastya hid 9 unforgettable memories in the sky. Tap or click any balloon to pop it!
+      </p>
+
+      <!-- Live Memory Tracker -->
+      <div class="memory-tracker-bar">
+        <div class="tracker-info">
+          <span class="tracker-label">Memories Unlocked:</span>
+          <span class="tracker-count" id="tracker-count">0 / 9</span>
+        </div>
+        <div class="memory-gem-pills" id="memory-gem-pills">
+          <span class="gem-pill" data-idx="0" title="Memory 1: Foodie Queen"> </span>
+          <span class="gem-pill" data-idx="1" title="Memory 2: Born to Pose"> </span>
+          <span class="gem-pill" data-idx="2" title="Memory 3: Golden Champion"> </span>
+          <span class="gem-pill" data-idx="3" title="Memory 4: Grace & Poise"> </span>
+          <span class="gem-pill" data-idx="4" title="Memory 5: Traditional Queen"> </span>
+          <span class="gem-pill" data-idx="5" title="Memory 6: Coaching Squad"> </span>
+          <span class="gem-pill" data-idx="6" title="Memory 7: Our Favourite Hangout Spot"> </span>
+          <span class="gem-pill" data-idx="7" title="Memory 8: Purple Butterfly"> </span>
+          <span class="gem-pill" data-idx="8" title="Memory 9: Boss Queen in Red"> </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Sky Arena where balloons float up from bottom to top -->
+    <div class="balloon-sky-arena" id="balloon-sky-arena"></div>
+
+    <!-- In-Game Bottom Navigation & Controls -->
+    <div class="game-bottom-controls">
+      <button id="view-unlocked-gallery-btn" class="subtle-btn mini-btn">📖 Memory Album (<span id="unlocked-count">0</span>/9)</button>
+      <button id="balloon-header-gifts-btn" class="glow-btn mini-btn" style="padding: 7px 16px; font-size: 0.85rem;">🎁 3 Surprise Gifts ✨</button>
+      <button id="back-to-cake-btn" class="subtle-btn mini-btn">🎂 Back to Cake</button>
+      <button id="balloon-replay-story-btn" class="subtle-btn mini-btn">↺ Story Start</button>
+    </div>
+
+    <!-- MEMORY REVEAL POLAROID MODAL (Pops up when a balloon is popped) -->
+    <div class="memory-modal-overlay" id="memory-modal-overlay">
+      <div class="memory-modal-card" id="memory-modal-card">
+        
+        <!-- Polaroid Pin -->
+        <div class="polaroid-pin">📌</div>
+        <button id="close-modal-x" class="modal-close-corner" title="Close">✕</button>
+
+        <!-- Memory Polaroid Image Area -->
+        <div class="memory-polaroid-frame">
+          <div class="memory-photo-art" id="modal-memory-art">
+            <img class="memory-photo-img" id="modal-memory-img" src="" alt="Memory Photo" style="display: none;" />
+            <div class="memory-art-emoji" id="modal-memory-emoji">🍜</div>
+          </div>
+          <div class="memory-polaroid-caption" id="modal-memory-caption">The Midnight Maggi Championship 🍜</div>
+        </div>
+
+        <!-- Heartfelt & Funny Story Description -->
+        <div class="memory-content-box">
+          <h3 class="memory-headline" id="modal-memory-title">The Midnight Maggi Championship 🍜✨</h3>
+          <p class="memory-story-text" id="modal-memory-story">
+            Remember that night we were all starving and argued for 40 straight minutes over who makes the best Maggi? You ended up ruling the kitchen like a queen, and we laughed till our stomachs hurt! You always make ordinary moments feel like pure cinema, DIII.
+          </p>
+          <div class="memory-author-signature" id="modal-memory-author">
+            — Signed with infinite love, The 3 Idiots 🫶
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="memory-modal-actions">
+          <button id="collect-memory-btn" class="glow-btn">Keep Popping Balloons! 🎈</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ALL MEMORIES COMPLETED CELEBRATION MODAL -->
+    <div class="all-completed-modal" id="all-completed-modal">
+      <div class="completed-card">
+        <div class="completed-crown">👑</div>
+        <div class="completed-badge">🎉 ALL 9 MEMORIES DISCOVERED! 🎉</div>
+        <h2 class="completed-title">Happy Birthday, Our Queen DIII! 💖</h2>
+        <p class="completed-subtitle">
+          "From silly late-night cravings to our deepest life milestones, having you as our DIII is the greatest gift. You bring joy, laughs, and pure warmth to our squad. We are the 3 luckiest idiots in the world!"
+        </p>
+        <div class="squad-final-pills">
+          <span class="s-pill aaryan">📸 Aaryan</span>
+          <span class="s-pill geethika">🎀 Geethika</span>
+          <span class="s-pill agastya">🎉 Agastya</span>
+        </div>
+        <div class="post-countdown-banner balloon-redirect-banner">
+          <span class="countdown-pulse-dot"></span>
+          <span>Taking you directly to your 3 Surprise Gifts in <strong id="balloon-countdown-sec">60</strong>s... 🎁✨</span>
+        </div>
+        <div class="completed-actions">
+          <button id="balloon-to-gifts-btn" class="glow-btn" style="background: linear-gradient(135deg, #ffd166, #ff70a6); color: #120924; font-weight: 800;">🎁 Open 3 Surprise Gifts Now! ✨</button>
+          <button id="open-gallery-all-btn" class="subtle-btn">📖 View Full Memory Album</button>
+          <button id="restart-balloons-btn" class="subtle-btn">🎈 Pop More Balloons</button>
+          <button id="replay-all-btn" class="subtle-btn">↺ Replay From Start</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMORY GALLERY MODAL (To browse all unlocked memories anytime) -->
+    <div class="memory-gallery-modal" id="memory-gallery-modal">
+      <div class="gallery-wrapper">
+        <div class="gallery-header">
+          <div class="gallery-header-left">
+            <span class="gallery-badge">📸 SQUAD KEEPSAKES</span>
+            <h2 class="gallery-title">DIII's Birthday Memory Album 💖</h2>
+          </div>
+          <button id="close-gallery-btn" class="close-gallery-icon" title="Close Album">✕</button>
+        </div>
+        <div class="gallery-cards-grid" id="gallery-cards-grid">
+          <!-- Dynamically populated memory polaroid cards -->
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       SCENE 10: 3 SURPRISE GIFTS FROM 3 OF US
+       ========================================== -->
+  <section id="gifts-screen" class="gifts-screen">
+    
+    <!-- Ambient Sparkle Glow Overlay -->
+    <div class="gifts-ambient-glow"></div>
+
+    <!-- Header Section -->
+    <div class="gifts-header">
+      <div class="gifts-badge">🎁 SQUAD'S HEARTFELT SURPRISES 🎁</div>
+      <h1 class="gifts-main-title">3 Surprise Gifts For Our Queen DIII ✨</h1>
+      <p class="gifts-subtitle">
+        A special gift from each of us, placed beside one by one. Tap each gift box to unwrap your surprise and read our personal letters!
+      </p>
+      <div class="gifts-top-actions">
+        <button id="unwrap-all-gifts-btn" class="glow-btn unwrap-all-btn">✨ Unwrap All 3 Gifts Together! ✨</button>
+        <button id="rewrap-all-gifts-btn" class="subtle-btn rewrap-btn" style="display: none;">🎁 Re-wrap All Gifts</button>
+      </div>
+    </div>
+
+    <!-- 3 Gifts Container: Beside One by One -->
+    <div class="gifts-row-container" id="gifts-row-container">
+      
+      <!-- GIFT 1: AARYAN -->
+      <div class="gift-column-card aaryan-gift-card" id="gift-card-aaryan" data-sender="aaryan">
+        
+        <!-- Closed 3D Gift Box Stage -->
+        <div class="gift-box-3d" id="gift-box-aaryan" title="Click to unwrap Aaryan's gift!">
+          <div class="gift-tap-hint">TAP TO UNWRAP 🎁</div>
+          <div class="gift-box-lid">
+            <div class="gift-bow ribbon-bow-aaryan">
+              <span class="bow-knot">🎀</span>
+            </div>
+            <div class="ribbon-strip vertical"></div>
+            <div class="ribbon-strip horizontal"></div>
+            <div class="lid-rim"></div>
+          </div>
+          <div class="gift-box-body">
+            <div class="ribbon-strip vertical"></div>
+            <div class="ribbon-strip horizontal"></div>
+            <div class="gift-box-pattern"></div>
+            <div class="gift-tag-pendant">
+              <span class="tag-pin">📍</span>
+              <div class="tag-paper">
+                <span class="tag-to">To: DIII 👑</span>
+                <span class="tag-from">From: Aaryan 📸</span>
+              </div>
+            </div>
+          </div>
+          <div class="box-floating-sparkles">
+            <span class="s1">✦</span>
+            <span class="s2">✨</span>
+            <span class="s3">⚡</span>
+          </div>
+        </div>
+
+        <!-- Unfurled Heartfelt Letter & Keepsake (Revealed on Open) -->
+        <div class="gift-letter-scroll" id="gift-letter-aaryan">
+          <div class="letter-wax-seal">
+            <span class="seal-icon">📸</span>
+          </div>
+          <div class="letter-header">
+            <div class="sender-avatar-pill aaryan-pill">
+              <span class="avatar-icon">📸</span>
+              <span class="avatar-name">Aaryan</span>
+            </div>
+            <h3 class="letter-title">To Mounika — My Elder Sister ❤️</h3>
+          </div>
+          <div class="letter-body aaryan-long-letter">
+            <p class="letter-paragraph">
+              Happy Birthday to the girl who somehow turned from a stranger into someone I can call my sister. 🥳❤️
+            </p>
+            <p class="letter-paragraph">
+              Today isn't just another birthday. Maybe it's a small reminder that you've completed another chapter of your life — and now, it's time to start a better one.
+            </p>
+            <p class="letter-paragraph">
+              When I look back, it's actually funny how our journey started. It's been only around three months since we met, but somehow, within these three months, we've collected so many conversations, memories, laughs, problems, and unexpected moments. And yes… I still remember how I literally installed Snapchat because of you. 😂
+            </p>
+            <p class="letter-paragraph">
+              From those first conversations to everything that happened after that, our journey has had so many shifts. Some days were full of fun, some were confusing, some were emotional, and some were just completely chaotic. But every part of it became a small piece of our story.
+            </p>
+            <p class="letter-paragraph">
+              And then came the days when your health wasn't on your side. Getting a blood infection and being hospitalized for three days wasn't easy. Seeing you go through that made me realize something simple — your health comes before everything else.<br><br>
+              So please, start taking care of yourself properly. Eat well, don't skip meals, drink enough water, and give your body what it needs. Add fruits and vegetables to your food — things like spinach and other leafy greens, beans, peas, lentils, oranges, guava, apples, and other fresh fruits can be good additions to a balanced diet. And most importantly, follow whatever your doctor has advised you.<br><br>
+              <em>You don't always have to be strong for everyone else. Sometimes, being strong simply means taking care of yourself.</em>
+            </p>
+            <p class="letter-paragraph">
+              And Mounika… I know things haven't been easy lately.<br><br>
+              You felt hurt because some friendships changed. You had problems with people, and what happened with Yogitha affected you so much that it brought tears and even started affecting your studies. I know losing or damaging a friendship can hurt more than people realize.<br><br>
+              But please don't let one painful chapter convince you that the whole story is over.<br><br>
+              If your friendship with Yogitha still means something to you, don't give up on it because of what others did. Give it time. Stay genuine. Don't force anything. Sometimes friendships need space before they find their way back.<br><br>
+              And please don't let friendship problems take away the student inside you.<br><br>
+              We're both in Intermediate First Year at Vedantu Learning Centers, and this is the time when you've got a path to build. Your studies deserve your attention too. One bad phase doesn't decide your marks, and one difficult month doesn't decide your future.<br><br>
+              You've still got time.
+            </p>
+            <div class="letter-promise-card">
+              <span class="promise-tag">A Small Promise To Yourself 🤞</span>
+              <ul class="promise-list">
+                <li>Don't let people decide your mood.</li>
+                <li>Don't let one friendship decide your worth.</li>
+                <li>Don't let one bad phase decide your future.</li>
+              </ul>
+            </div>
+            <p class="letter-paragraph">
+              And please don't go into that "full silent mode" you were talking about. 😭<br><br>
+              You're one of the most talkative people I've known, and suddenly deciding that you're going to stop talking to everyone and isolate yourself isn't the answer.<br><br>
+              You don't have to talk to everyone.<br>
+              You don't have to trust everyone.<br>
+              You don't have to explain yourself to everyone.<br><br>
+              But don't shut the whole world out just because a few people hurt you.<br><br>
+              Stay neutral. Be kind. Keep your distance from unnecessary drama. Talk to the people who genuinely care about you.<br><br>
+              And if something is bothering you, you can tell me.<br><br>
+              You don't have to keep everything inside and pretend you're completely fine. Whether it's something serious, something stupid, something about friendship, studies, or just a random bad day — say it. Sometimes sharing what's on your mind makes things a little lighter.
+            </p>
+            <div class="letter-reset-card">
+              <span class="reset-tag">This Birthday Is Your Reset Button ✨</span>
+              <p>Not because you have to suddenly become a completely different person. But because from today, you can start becoming a better version of yourself.</p>
+              <ul class="reset-steps">
+                <li>✨ Wake up with a little more purpose.</li>
+                <li>✨ Study with a little more focus.</li>
+                <li>✨ Take care of your health.</li>
+                <li>✨ Protect your peace.</li>
+                <li>✨ Keep the people who genuinely matter.</li>
+                <li>✨ Let go of unnecessary drama.</li>
+              </ul>
+              <p class="reset-subtext">And slowly, step by step, start building the path you want for yourself. You don't need to fix everything in one day. Just start.<br><br>
+              Because sometimes the biggest changes begin with one ordinary decision:<br>
+              <strong>"Okay… from today, I'll try again."</strong></p>
+            </div>
+            <p class="letter-paragraph">
+              So Mounika, on your birthday, I hope you smile more, worry less, eat properly, study better, take care of yourself, and never forget that difficult phases don't last forever.<br><br>
+              You've already come through a lot in these past few months.<br><br>
+              Now it's your turn to write the next part.<br><br>
+              • No more letting bad days control you.<br>
+              • No more losing yourself because of people.<br>
+              • No more giving up on yourself.<br><br>
+              This is your day.<br>
+              <strong>Your reset. Your comeback. Your next chapter. ❤️</strong>
+            </p>
+            <p class="letter-paragraph">
+              And maybe, three months ago, I never imagined that installing Snapchat for a girl would eventually lead to me writing a whole birthday letter for my elder sister.<br><br>
+              Life really has its own funny way of creating stories. 😂❤️<br><br>
+              So once again…<br><br>
+              <strong>Happy Birthday, Mounika Diii! 🥳❤️</strong><br><br>
+              Keep that smile. Keep that madness. Keep being you — just a little stronger, a little wiser, and a lot more focused.<br><br>
+              Now go make this year yours.<br>
+              You've got a path to build.<br>
+              Go walk it. ✨
+            </p>
+            <div class="letter-ps-telugu-note">
+              <span class="ps-label">📝 Aaryan's Note:</span>
+              <p>Akka nenu oka 2 pages prompt chatgpt ki icchi generate chesa so sonthanga rayadaniki time anthaga ledhu but idhi inka thaggincha emaina feel aythe sorry (birthday roju sad anipisthuna emo )</p>
+            </div>
+            <!-- Snapchat Spotlight Memory Link -->
+            <div class="letter-snapchat-link-box">
+              <div class="snapchat-link-header">
+                <span class="snap-ghost-icon">👻</span>
+                <span class="snap-title">Our Special Snapchat Memory</span>
+              </div>
+              <p class="snap-desc">"I still remember how I literally installed Snapchat because of you 😂"</p>
+              <a href="https://www.snapchat.com/spotlight/W7_EDlXWTBiXAEEniNoMPwAAYemVkamR5YXNzAZv1Cnl-AZv1Cnk3AAAAAQ?share_id=egFCq8bTqwc&locale=en-US" target="_blank" rel="noopener noreferrer" class="snapchat-btn">
+                <span class="snap-btn-icon">▶</span> Watch on Snapchat Spotlight 👻✨
+              </a>
+            </div>
+          </div>
+          <div class="letter-keepsake-box">
+            <span class="keepsake-badge">🏆 SURPRISE KEEPSAKE #1</span>
+            <div class="keepsake-content">
+              <span class="keepsake-emoji">📷✨</span>
+              <div class="keepsake-text">
+                <strong>Golden Camera of Everlasting Memories</strong>
+                <p>Capturing every unforgettable milestone with our DIII!</p>
+              </div>
+            </div>
+          </div>
+          <div class="letter-footer">
+            <span class="letter-signature">— With all my love & respect, Aaryan 📸❤️</span>
+            <button class="subtle-btn fold-gift-btn" data-target="aaryan">🎁 Close Gift</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GIFT 2: GEETHIKA -->
+      <div class="gift-column-card geethika-gift-card" id="gift-card-geethika" data-sender="geethika">
+        
+        <!-- Closed 3D Gift Box Stage -->
+        <div class="gift-box-3d" id="gift-box-geethika" title="Click to unwrap Geethika's gift!">
+          <div class="gift-tap-hint">TAP TO UNWRAP 🎁</div>
+          <div class="gift-box-lid">
+            <div class="gift-bow ribbon-bow-geethika">
+              <span class="bow-knot">🎀</span>
+            </div>
+            <div class="ribbon-strip vertical"></div>
+            <div class="ribbon-strip horizontal"></div>
+            <div class="lid-rim"></div>
+          </div>
+          <div class="gift-box-body">
+            <div class="ribbon-strip vertical"></div>
+            <div class="ribbon-strip horizontal"></div>
+            <div class="gift-box-pattern"></div>
+            <div class="gift-tag-pendant">
+              <span class="tag-pin">📍</span>
+              <div class="tag-paper">
+                <span class="tag-to">To: Brooo 👑</span>
+                <span class="tag-from">From: Geethika 🎀</span>
+              </div>
+            </div>
+          </div>
+          <div class="box-floating-sparkles">
+            <span class="s1">💖</span>
+            <span class="s2">✨</span>
+            <span class="s3">🌸</span>
+          </div>
+        </div>
+
+        <!-- Unfurled Heartfelt Letter & Keepsake (Revealed on Open) -->
+        <div class="gift-letter-scroll" id="gift-letter-geethika">
+          <div class="letter-wax-seal">
+            <span class="seal-icon">🎀</span>
+          </div>
+          <div class="letter-header">
+            <div class="sender-avatar-pill geethika-pill">
+              <span class="avatar-icon">🎀</span>
+              <span class="avatar-name">Geethika</span>
+            </div>
+            <h3 class="letter-title">To Mounika Broooooo! 💖✨</h3>
+          </div>
+          <div class="letter-body geethika-long-letter">
+            <p class="letter-paragraph">
+              Happy Birthdayyy Mounika broooooo!! 🥳🎂🥳🤩😚😘😍💖💗🥳. I’m really glad that I got to know you and that you became such a good friend of mine. You’re literally such a fun, caring and amazing person, and I hope you never change that beautiful part of yourself.
+            </p>
+            <p class="letter-paragraph">
+              I used to love our conversations, stupid jokes, funny moments 😂😭, but honestly, those are the memories I’ll always be happy to have.
+            </p>
+            <p class="letter-paragraph">
+              I hope this year brings you a lot of happiness, good memories, good health (make sure you drink lot of beetroot juice broo nii blood levels chala takkuva vunnai) and all the little things that make you smile. Never forget how special and loved you are by the people around you. Keep smiling, keep being your crazy self, Happy Birthday once again! I hope you have the most amazing day 🫶🏻✨🎂💗
+            </p>
+            <div class="letter-sweet-highlight geethika-highlight">
+              <p class="sweet-quote">💖 Loveee youuuu brooooo<br>Brooo nijam Chepputhunna I really loved the time I spent with you literal ga each and every moment</p>
+            </div>
+            <p class="letter-paragraph">
+              Once again a many more happy returns of the day 🥳🎂🎂🎂🎂🤩💖💖💖💖💖💖💖💖🥳🥳🥳🥳🥳
+            </p>
+
+            <!-- Instagram Reel Memory Link -->
+            <div class="letter-instagram-link-box">
+              <div class="instagram-link-header">
+                <span class="insta-cam-icon">📸</span>
+                <span class="insta-title">Our Special Instagram Reel</span>
+              </div>
+              <p class="insta-desc">"Literal ga each and every moment spent with you is pure love 💖"</p>
+              <a href="https://www.instagram.com/reel/DOuhZIdCUOG/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="instagram-btn">
+                <span class="insta-btn-icon">▶</span> Watch Reel on Instagram 📸✨
+              </a>
+              <a href="https://www.instagram.com/reel/DOuhZIdCUOG/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="instagram-raw-link" title="Open Instagram Reel">
+                🔗 Open Reel: instagram.com/reel/DOuhZIdCUOG
+              </a>
+            </div>
+
+            <!-- Geethika & Mounika Special Memory Photo -->
+            <div class="letter-memory-photo-card" id="geethika-memory-card" title="Click to view full memory!">
+              <div class="memory-photo-frame">
+                <img src="images/geethika_mounika_memory.jpg" alt="Mounika and Geethika - Just a Friday" class="memory-photo-img" />
+                <div class="memory-photo-shine"></div>
+                <div class="memory-photo-zoom-hint">🔍 Tap to Zoom</div>
+              </div>
+              <div class="memory-photo-caption">
+                <span class="memory-photo-title">Just a Friday ✨</span>
+                <span class="memory-photo-subtitle">Forever My Brooo &amp; Soul Sister 🎀💖</span>
+              </div>
+            </div>
+          </div>
+          <div class="letter-keepsake-box">
+            <span class="keepsake-badge">💎 SURPRISE KEEPSAKE #2</span>
+            <div class="keepsake-content">
+              <span class="keepsake-emoji">💎🌹</span>
+              <div class="keepsake-text">
+                <strong>Eternal Sisterhood Diamond & Scented Rose</strong>
+                <p>A bond that shines brighter than all the stars in the sky!</p>
+              </div>
+            </div>
+          </div>
+          <div class="letter-footer">
+            <span class="letter-signature">— Loveee youuuu brooooo, Geethika 🎀💖</span>
+            <button class="subtle-btn fold-gift-btn" data-target="geethika">🎁 Close Gift</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GIFT 3: AGASTYA -->
+      <div class="gift-column-card agastya-gift-card" id="gift-card-agastya" data-sender="agastya">
+        
+        <!-- Closed 3D Gift Box Stage -->
+        <div class="gift-box-3d" id="gift-box-agastya" title="Click to unwrap Agastya's gift!">
+          <div class="gift-tap-hint">TAP TO UNWRAP 🎁</div>
+          <div class="gift-box-lid">
+            <div class="gift-bow ribbon-bow-agastya">
+              <span class="bow-knot">🎀</span>
+            </div>
+            <div class="ribbon-strip vertical"></div>
+            <div class="ribbon-strip horizontal"></div>
+            <div class="lid-rim"></div>
+          </div>
+          <div class="gift-box-body">
+            <div class="ribbon-strip vertical"></div>
+            <div class="ribbon-strip horizontal"></div>
+            <div class="gift-box-pattern"></div>
+            <div class="gift-tag-pendant">
+              <span class="tag-pin">📍</span>
+              <div class="tag-paper">
+                <span class="tag-to">To: Akka (DIII) 👑</span>
+                <span class="tag-from">From: Little Bro Agastya 👦❤️</span>
+              </div>
+            </div>
+          </div>
+          <div class="box-floating-sparkles">
+            <span class="s1">🎉</span>
+            <span class="s2">⭐</span>
+            <span class="s3">🍫</span>
+          </div>
+        </div>
+
+        <!-- Unfurled Heartfelt Letter & Keepsake (Revealed on Open) -->
+        <div class="gift-letter-scroll" id="gift-letter-agastya">
+          <div class="letter-wax-seal">
+            <span class="seal-icon">👦</span>
+          </div>
+          <div class="letter-header">
+            <div class="sender-avatar-pill agastya-pill">
+              <span class="avatar-icon">👦</span>
+              <span class="avatar-name">Agastya</span>
+            </div>
+            <h3 class="letter-title">To Mounika Diii — From Your Little Bro Agastya ❤️</h3>
+          </div>
+          <div class="letter-body agastya-long-letter">
+            <p class="letter-paragraph">
+              Happy Birthday, Mounika Diii! ❤️
+            </p>
+            <p class="letter-paragraph">
+              Some friendships begin with years of knowing each other, while some begin with nothing more than one random conversation. Ours was one of those unexpected ones. We met because of our common friends, started talking randomly, and somehow, without even realizing it, you became someone I now call my Akka. I still don’t know how a random conversation turned into a friendship that feels this comfortable in such a short time.
+            </p>
+            <p class="letter-paragraph">
+              The funny thing is, you probably don’t know that much about me, and honestly, I don’t know everything about you either. We don’t even have those long, endless conversations every day. But somehow, the little things matter. The way you care about my studies, my career, and what I’m going to do with my life genuinely means a lot to me. Sometimes, you don’t have to know someone completely to make them feel cared for.
+            </p>
+            <p class="letter-paragraph">
+              And then there’s our legendary <strong>Chit Chat</strong> group 😂 — where apparently our biggest responsibility is roasting each other. Between all the nonsense, jokes, and random conversations, we’ve created memories that I already know I’ll miss someday. And somewhere in between all that, I started imitating you with that one word — <strong>“Diiii!”</strong> 😂❤️ I don’t even know when that became a thing, but now it just feels like <em>our</em> thing.
+            </p>
+            <p class="letter-paragraph">
+              It’s only been around three months, maybe even a little less, but the comfort I feel with you, Aaryan, and Geethika is something I never expected. I never want to lose this bond. We still have two more years ahead of us ahh i think 1 and half year, and if there’s one thing I truly wish for, it’s that these two years become a collection of unforgettable memories — the kind we’ll talk about years later and laugh about like nothing ever changed.
+            </p>
+            <div class="letter-sweet-highlight agastya-highlight">
+              <p class="sweet-quote">“Some people enter your life by chance, but become memories you never want to lose.”</p>
+            </div>
+            <p class="letter-paragraph">
+              We don’t know where life will take us after these two years. Maybe we’ll all go in completely different directions, meet new people, and get busy with our own lives. But somewhere in the future, I hope the four of us — you, me, Aaryan, and Geethika — find our way back to each other, sit together again, and realize that even after everything changed, our bond never really did.
+            </p>
+            <p class="letter-paragraph">
+              And please, don’t forget me, Akka. 😭❤️ Because no matter where life takes us, I’ll always remember the girl who started as a random friend and somehow became my Akka.
+            </p>
+            <p class="letter-paragraph">
+              Most importantly, take care of yourself. Eat well, stay strong, and don’t forget to look after yourself. Otherwise, your Thammu Aaryan will be sad, and honestly, I can’t see two of my favourite people being sad or weak at the same time. ❤️
+            </p>
+            <p class="letter-paragraph">
+              I may not have a hundred things to say about our friendship, but I know one thing for sure — <strong>I’m really glad that random conversation happened.</strong>
+            </p>
+            <p class="letter-paragraph">
+              Happy Birthday once again, Akka. 🥳❤️<br>
+              Here’s to more roasting, more chaos, more “Diiii!” moments, and hopefully, a whole lot of memories together.
+            </p>
+            <div class="agastya-golden-bond-card">
+              <span class="bond-stars">✨ 🌟 ✨</span>
+              <p class="bond-text">Three months of friendship. Two years of memories waiting to happen. And hopefully, a lifetime of never forgetting each other. ❤️</p>
+            </div>
+
+            <!-- Instagram Reel Memory Link -->
+            <div class="letter-instagram-link-box agastya-insta-box">
+              <div class="instagram-link-header">
+                <span class="insta-cam-icon">🎬</span>
+                <span class="insta-title">Agastya &amp; Akka's Special Reel 🍕✨</span>
+              </div>
+              <p class="insta-desc">"To our legendary chaos, roasting &amp; unforgettable memories! 🥳❤️"</p>
+              <a href="https://www.instagram.com/reel/DeCXqdjSwA-/?utm_source=ig_web_copy_link&amp;stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="instagram-btn">
+                <span class="insta-btn-icon">▶</span> Watch Reel on Instagram 📸✨
+              </a>
+              <a href="https://www.instagram.com/reel/DeCXqdjSwA-/?utm_source=ig_web_copy_link&amp;stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="instagram-raw-link agastya-raw-link" title="Open Instagram Reel">
+                🔗 Open Reel: instagram.com/reel/DeCXqdjSwA-
+              </a>
+            </div>
+          </div>
+          <div class="letter-keepsake-box">
+            <span class="keepsake-badge">🍫 SURPRISE KEEPSAKE #3</span>
+            <div class="keepsake-content">
+              <span class="keepsake-emoji">🍫🏆</span>
+              <div class="keepsake-text">
+                <strong>Golden Cadbury Silk &amp; Siblinghood Trophy</strong>
+                <p>For the undisputed champion of feasts and laughs!</p>
+              </div>
+            </div>
+          </div>
+          <div class="letter-footer">
+            <span class="letter-signature">— From Your Little Bro, Agastya 👦❤️</span>
+            <button class="subtle-btn fold-gift-btn" data-target="agastya">🎁 Close Gift</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Navigation Bar for Gifts Screen -->
+    <div class="gifts-bottom-nav">
+      <button id="gifts-to-final-touch-btn" class="glow-btn final-touch-cta-btn">✨ Go to Final Touch ❤️ ✨</button>
+      <div class="gifts-secondary-nav">
+        <button id="gifts-back-to-balloons-btn" class="nav-control-btn">🎈 Balloon Memories</button>
+        <button id="gifts-back-to-cake-btn" class="nav-control-btn">🎂 Back to Cake</button>
+        <button id="gifts-replay-all-btn" class="nav-control-btn primary">↺ Replay Story From Beginning</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       SCENE 11: THE FINAL TOUCH (GRAND FINALE)
+       ========================================== -->
+  <section id="final-touch-screen" class="final-touch-screen">
+    
+    <!-- Ambient Sparkles & Golden Glow Overlay -->
+    <div class="final-touch-ambient"></div>
+
+    <div class="final-touch-container">
+      
+      <!-- Top Crown & Celebration Badge -->
+      <div class="final-crown-wrapper">
+        <span class="final-crown-icon">👑</span>
+        <div class="final-crown-glow"></div>
+      </div>
+      
+      <div class="final-touch-badge">✨ THE FINAL TOUCH • WITH ALL OUR LOVE ✨</div>
+
+      <h1 class="final-touch-title">Happy Birthday, Mounika DIII! 🎂🎉❤️</h1>
+      <p class="final-touch-subtitle">
+        To our Queen of Chaos, our sweetest Akka, and the girl who turns ordinary life into pure magic ✨
+      </p>
+
+      <!-- The Cute Heartfelt Quote Card -->
+      <div class="final-quote-card">
+        <div class="quote-sparkle-decor top-left">✨</div>
+        <div class="quote-sparkle-decor top-right">💖</div>
+        <div class="quote-sparkle-decor bottom-left">🌸</div>
+        <div class="quote-sparkle-decor bottom-right">💫</div>
+
+        <div class="quote-icon">❝</div>
+        <p class="final-quote-text">
+          Some people enter your life by chance, but turn into memories, laughter, and family you never ever want to lose. No matter where life takes each of us, how busy our schedules get, or how many years pass — our crazy Chit-Chat roasts, those unforgettable “Diiii!” moments, and the bond we share with our Akka will stay in our hearts forever.
+        </p>
+
+        <div class="final-quote-highlight">
+          🌸 Three months of unexpected friendship. Two years of memories waiting to happen. And a lifetime of never forgetting each other. 💖
+        </div>
+
+        <div class="final-quote-author">
+          — Forever with you, your 3 Idiots:<br>
+          <div class="author-pills-row">
+            <span class="author-pill aaryan-author">📸 Aaryan</span>
+            <span class="author-pill geethika-author">🎀 Geethika</span>
+            <span class="author-pill agastya-author">👦 Agastya</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           FEATURE 2: THE SQUAD'S "NEXT 2 YEARS" BUCKET LIST
+           ========================================== -->
+      <div class="squad-bucket-card" id="squad-bucket-card">
+        <div class="bucket-header">
+          <div class="bucket-top-tag">⏳ SQUAD PLEDGE • THE NEXT 2 YEARS ⏳</div>
+          <h2 class="bucket-title">Our Next 2 Years Bucket List 🌟</h2>
+          <p class="bucket-subtitle">
+            <em>"Three months of friendship. Two years of memories waiting to happen."</em><br>
+            Tap each goal to seal it into our squad's destiny with our DIII! ✨
+          </p>
+
+          <div class="bucket-progress-box">
+            <div class="bucket-progress-bar-bg">
+              <div class="bucket-progress-fill" id="bucket-progress-fill" style="width: 0%;"></div>
+            </div>
+            <div class="bucket-progress-status">
+              <span class="progress-status-label" id="bucket-progress-label">0 of 8 Goals Sealed</span>
+              <span class="progress-status-pct" id="bucket-progress-pct">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bucket-items-grid" id="bucket-items-grid">
+          <!-- Item 1 -->
+          <div class="bucket-goal-item" data-goal-id="0">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">📚</span>
+                <h4 class="goal-title">Survive All Semesters &amp; Exam Panics Together</h4>
+              </div>
+              <p class="goal-desc">Front-bench doubt sessions, syllabus marathons, and zero tears (mostly)!</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="bucket-goal-item" data-goal-id="1">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">💘</span>
+                <h4 class="goal-title">Help Agastya to Get a Girlfriend</h4>
+              </div>
+              <p class="goal-desc">Top priority squad mission: playing wingman to find the right girl for our little bro while roasting him endlessly! 😂</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="bucket-goal-item" data-goal-id="2">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">📸</span>
+                <h4 class="goal-title">1,000+ More Photos at Our Post-College Hangout Spot</h4>
+              </div>
+              <p class="goal-desc">That one corner has our hearts — let's fill it with hundreds more laughs &amp; selfies.</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="bucket-goal-item" data-goal-id="3">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">🌆</span>
+                <h4 class="goal-title">Our First Outing Together</h4>
+              </div>
+              <p class="goal-desc">No more postponed plans — the 4 of us stepping out for our first epic full-day squad adventure! ✨</p>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="bucket-goal-item" data-goal-id="4">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">☕</span>
+                <h4 class="goal-title">GIVE A TREAT IN STARBUCKS FOR ALL OF US</h4>
+              </div>
+              <p class="goal-desc">Birthday Queen DIII treating her 3 favourite people to Frappuccinos, coffees &amp; snacks at Starbucks! 💳😋</p>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="bucket-goal-item" data-goal-id="5">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">😂</span>
+                <h4 class="goal-title">Record Agastya Screaming “DIIII!” at Maximum Volume</h4>
+              </div>
+              <p class="goal-desc">Because it's not an official squad day until the signature echo resonates everywhere.</p>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="bucket-goal-item" data-goal-id="6">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">🎓</span>
+                <h4 class="goal-title">Toss Graduation Caps Together &amp; Celebrate Each Other</h4>
+              </div>
+              <p class="goal-desc">Cheering the loudest when Mounika walks up to accept her degree with pride.</p>
+            </div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="bucket-goal-item" data-goal-id="7">
+            <div class="goal-checkbox"><span class="check-mark">✓</span></div>
+            <div class="goal-content">
+              <div class="goal-header-row">
+                <span class="goal-emoji">❤️</span>
+                <h4 class="goal-title">Lifetime Promise: Always Find Our Way Back to Each Other</h4>
+              </div>
+              <p class="goal-desc">No matter where jobs or life take us, our bond will remain forever unchanged.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Completion Celebration Callout -->
+        <div class="bucket-all-done-banner" id="bucket-all-done-banner" style="display: none;">
+          <span class="badge-icon">🌟</span>
+          <div class="badge-msg">
+            <strong>ALL 8 SQUAD GOALS SEALED INTO DESTINY! 💫</strong>
+            <p>Here's to the next 2 years of pure magic with our beloved Akka Mounika! ❤️</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           FEATURE 1: "BEST AKKA OF THE UNIVERSE" OFFICIAL AWARD CERTIFICATE
+           ========================================== -->
+      <div class="akka-certificate-section" id="akka-certificate-section">
+        <div class="certificate-section-header">
+          <span class="cert-crown-sparkle">👑 📜 👑</span>
+          <h2 class="cert-section-title">Official Squad Recognition</h2>
+          <p class="cert-section-subtitle">Conferred by unanimous vote of the Chit-Chat Trio</p>
+        </div>
+
+        <div class="royal-certificate-card" id="royal-certificate-card">
+          <!-- Ornate Filigree Corner Accents -->
+          <div class="cert-corner tl">❖</div>
+          <div class="cert-corner tr">❖</div>
+          <div class="cert-corner bl">❖</div>
+          <div class="cert-corner br">❖</div>
+
+          <div class="cert-inner-frame">
+            <div class="cert-ribbon-tag">
+              <span>★ OFFICIAL SQUAD CONFERMENT ★</span>
+            </div>
+
+            <div class="cert-seal-wrap">
+              <div class="cert-gold-seal" id="cert-gold-seal" title="Tap to inspect the Royal Seal!">
+                <div class="seal-glow-ring"></div>
+                <div class="seal-core">
+                  <span class="seal-crown">👑</span>
+                  <span class="seal-text-arch">BEST AKKA • SQUAD CERTIFIED</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cert-header-award">THE "BEST AKKA OF THE UNIVERSE" AWARD</div>
+            <p class="cert-subtitle-top">PROUDLY PRESENTED WITH ENDLESS LOVE &amp; RESPECT TO</p>
+            <h1 class="cert-recipient-name">Mounika Diii 👑</h1>
+            <div class="cert-divider-line"><span>✦ ✧ ✦</span></div>
+
+            <p class="cert-citation-body">
+              For enduring our endless Chit-Chat roasts with grace and laughter, caring deeply about our studies, careers, and well-being, being the warmest, most patient, and protective elder sister in the world, and letting us scream <strong>“DIIII!”</strong> whenever chaos erupts — you are hereby officially decorated with the Highest Honour: <em>The Greatest Akka in the Entire Universe!</em>
+            </p>
+
+            <!-- Signatures Row -->
+            <div class="cert-signatures-grid">
+              <div class="cert-sign-card">
+                <div class="sign-handwritten">Aaryan 🎧</div>
+                <div class="sign-role">Thammu &amp; Candid Camera Master</div>
+              </div>
+              <div class="cert-sign-card">
+                <div class="sign-handwritten">Geethika 🎀</div>
+                <div class="sign-role">Squad Leader &amp; Bestie for Life</div>
+              </div>
+              <div class="cert-sign-card">
+                <div class="sign-handwritten">Agastya 😺</div>
+                <div class="sign-role">Little Bro &amp; “Diiii!” Specialist</div>
+              </div>
+            </div>
+
+            <div class="cert-footer-meta">
+              <span class="cert-validity">📅 Validity: Eternity &amp; Beyond ❤️</span>
+              <span class="cert-seal-stamp">✨ Certified 100% Pure Heart &amp; Sweetest Soul</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-actions-row">
+          <button id="print-cert-btn" class="glow-btn cert-action-btn">
+            <span class="btn-icon">📜</span> Save / Print Certificate
+          </button>
+          <button id="stamp-seal-btn" class="subtle-btn cert-action-btn">
+            <span class="btn-icon">✨</span> Stamp Golden Seal
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation: "then show the surprise boxes or ballon popus to go" -->
+      <div class="final-nav-section">
+        <div class="final-nav-header">
+          <span class="nav-header-stars">⭐ 🌟 ⭐</span>
+          <h2 class="final-nav-title">Explore Your Birthday Surprise Anytime</h2>
+          <p class="final-nav-subtitle">Hop back to any part of your celebration whenever you want! 👑</p>
+        </div>
+
+        <div class="final-nav-grid">
+          <!-- 1. Surprise Gifts -->
+          <div class="final-nav-card gift-nav-card" id="final-to-gifts-card">
+            <div class="final-nav-card-header">
+              <span class="final-nav-icon">🎁</span>
+              <div class="final-nav-info">
+                <h3>3 Surprise Gifts</h3>
+                <p>Re-read our personal letters, memories &amp; Instagram reels</p>
+              </div>
+            </div>
+            <button id="final-to-gifts-btn" class="glow-btn nav-action-btn">🎁 Open Surprise Boxes</button>
+          </div>
+
+          <!-- 2. Balloon Popups -->
+          <div class="final-nav-card balloon-nav-card" id="final-to-balloons-card">
+            <div class="final-nav-card-header">
+              <span class="final-nav-icon">🎈</span>
+              <div class="final-nav-info">
+                <h3>Balloon Memories</h3>
+                <p>Pop floating balloons &amp; view the special memory polaroids</p>
+              </div>
+            </div>
+            <button id="final-to-balloons-btn" class="glow-btn nav-action-btn">🎈 Pop Balloons</button>
+          </div>
+
+          <!-- 3. Cake Cutting -->
+          <div class="final-nav-card cake-nav-card" id="final-to-cake-card">
+            <div class="final-nav-card-header">
+              <span class="final-nav-icon">🎂</span>
+              <div class="final-nav-info">
+                <h3>Oreo Birthday Cake</h3>
+                <p>Blow out candles &amp; slice the cake again</p>
+              </div>
+            </div>
+            <button id="final-to-cake-btn" class="subtle-btn nav-action-btn">🎂 Back to Cake</button>
+          </div>
+
+          <!-- 4. Replay from Beginning -->
+          <div class="final-nav-card replay-nav-card" id="final-replay-all-card">
+            <div class="final-nav-card-header">
+              <span class="final-nav-icon">↺</span>
+              <div class="final-nav-info">
+                <h3>Replay Full Story</h3>
+                <p>Watch the full animated story from the very beginning</p>
+              </div>
+            </div>
+            <button id="final-replay-all-btn" class="subtle-btn nav-action-btn">↺ Replay Story</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       FEATURE 3: FLOATING "SEND LOVE TO DIII" HEART STORM WIDGET
+       ========================================== -->
+  <div class="heart-storm-widget" id="heart-storm-widget">
+    <div class="heart-storm-particles-container" id="heart-storm-particles"></div>
+    <button class="heart-storm-btn" id="heart-storm-btn" title="Tap repeatedly to send love to DIII!" aria-label="Send Love to DIII">
+      <span class="heart-storm-icon">💖</span>
+      <span class="heart-storm-label">Send Love</span>
+      <span class="heart-storm-counter" id="heart-counter">1,250</span>
+    </button>
+    <div class="heart-milestone-toast" id="heart-milestone-toast"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
